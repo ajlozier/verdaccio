@@ -55,6 +55,9 @@ uplinks:
     # set this to false to prevent tarballs from this upstream
     # to be stored in the local storage (defaults to true)
     #cache: false
+    
+    # set this to false to disable strict SSL checking (defaults to true)
+    #strictSSL: false
 
 packages:
   '@*/*':

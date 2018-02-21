@@ -43,6 +43,7 @@ class ProxyStorage {
    */
   constructor(config, mainConfig) {
     this.config = config;
+	this.strictSSL = (typeof config.strictSSL === 'undefined') ? true : config.strictSSL;
     this.failed_requests = 0;
     this.userAgent = mainConfig.user_agent;
     this.ca = config.ca;
@@ -179,6 +180,7 @@ class ProxyStorage {
       encoding: null,
       gzip: true,
       timeout: this.timeout,
+	  strictSSL: this.strictSSL
     }, requestCallback);
 
     let statusCalled = false;
@@ -347,6 +349,7 @@ class ProxyStorage {
       uri: `/${encode(name)}`,
       json: true,
       headers: headers,
+	  strictSSL: this.strictSSL,
       req: options.req,
     }, (err, res, body) => {
       if (err) {
@@ -378,6 +381,7 @@ class ProxyStorage {
     const readStream = this.request({
       uri_full: url,
       encoding: null,
+	  strictSSL: this.strictSSL,
       headers: {
         Accept: contenTypeAccept,
       },
@@ -425,6 +429,7 @@ class ProxyStorage {
     const requestStream = this.request({
       uri: options.req.url,
       req: options.req,
+	  strictSSL: this.strictSSL,
       headers: {
         referer: options.req.headers.referer,
       },
